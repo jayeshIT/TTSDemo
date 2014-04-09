@@ -1,0 +1,168 @@
+<h1><em>TextToSpeech Module</em></h1>
+<h2>Description</h2>
+<p><em>TextToSpeech Module</em></p>
+<h2>Requrement</h2>
+<p>Android min-sdk: Android 2.2 (API Level 8)
+Titanium 2.1.0.GA</p>
+<h2>Accessing the tts Module</h2>
+<p>To access this module from JavaScript, you would do the following:</p>
+<pre><code>var tts = require("jp.isisredirect.tts");
+</code></pre>
+<p>The tts variable is a reference to the Module object. <br />
+</p>
+<h2>Reference</h2>
+<h3>module methods</h3>
+<h4>TTSMODULE.getEngines()</h4>
+<p>gets list of TTS engines that are intalled in Android device.</p>
+<h5>Parameters</h5>
+<ul>
+<li>void</li>
+</ul>
+<h5>Returns</h5>
+<ul>
+<li>Dict<String, String></li>
+</ul>
+<h4>TTSMODULE.initTTS(String enginepackangename) : Boolean</h4>
+<p>initialize TTS engine specified by <em>enginepackangename</em>.</p>
+<p>You should check in <em>initok</em> or <em>error</em> event whether the specified TTS engine is actually available.</p>
+<h5>Parameters</h5>
+<ul>
+<li>enginepackangename : String</li>
+</ul>
+<p>(optional) the package name of TTS engine to use.</p>
+<h6>default :</h6>
+<p>use TTS engine set by the device setting.</p>
+<h5>Returns</h5>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>true if the package of TTS engine specified by enginepackangename is found, even though TTS engine is not actually available.</p>
+<p>allways true if enginepackangename is not specified, even though TTS engine is not actually available. </p>
+<h4>TTSMODULE.checkTTS(String enginepackangename) : void</h4>
+<p>requires  the supported languages information of TTS engine specified by <em>enginepackangename</em>.</p>
+<h5>Parameters</h5>
+<ul>
+<li>enginepackangename : String</li>
+</ul>
+<p>(optional) the package name of TTS engine to use.</p>
+<h6>default :</h6>
+<p>Android OS shows <em>TTS engine selection dialog</em> for user.</p>
+<p>checkTTS result (in <em>checkok</em> event) is the information of user's selected TTS engine.</p>
+<h5>Returns</h5>
+<ul>
+<li>void</li>
+</ul>
+<h4>TTSMODULE.isSupportedLang(String localeString) : Boolean</h4>
+<p>check whether the specified language is supported by the current TTS engine.</p>
+<h5>Parameters</h5>
+<ul>
+<li>localeString : String</li>
+</ul>
+<p>locale string to check for.</p>
+<h5>Returns</h5>
+<ul>
+<li>Boolean</li>
+</ul>
+<h4>TTSMODULE.setLanguage(String localeString) : Boolean</h4>
+<p>set language for TTS engine to use.</p>
+<h5>Parameters</h5>
+<ul>
+<li>localeString : String
+locale string is one of languages ("en-usa" etc.) that <em>checkok</em> event provided.</li>
+</ul>
+<h5>Returns</h5>
+<ul>
+<li>Boolean</li>
+</ul>
+<h4>TTSMODULE.getLanguage() : String</h4>
+<p>get current language that TTS engine uses.</p>
+<h5>Parameters</h5>
+<ul>
+<li>void : </li>
+</ul>
+<h5>Returns</h5>
+<ul>
+<li>String</li>
+</ul>
+<p>locale string to use, like "en-usa".</p>
+<h4>TTSMODULE.isSpeaking() : Boolean</h4>
+<p>get whether TTS engine is speeking.</p>
+<h5>Parameters</h5>
+<ul>
+<li>void : </li>
+</ul>
+<h5>Returns</h5>
+<ul>
+<li>Boolean</li>
+</ul>
+<p>true if TTS engine is speaking.</p>
+<h4>TTSMODULE.speak(String text, String utteranceId) : Boolean</h4>
+<p>get whether TTS engine is speeking.</p>
+<h5>Parameters</h5>
+<ul>
+<li>
+<p>text : String
+text to speak.</p>
+</li>
+<li>
+<p>utteranceId : String</p>
+</li>
+</ul>
+<p>(optional) make TTS engine to fire <em>utterancecomplete</em> event when speech is finished.</p>
+<h5>Returns</h5>
+<ul>
+<li>Boolean</li>
+</ul>
+<h4>TTSMODULE.shutdown() : void</h4>
+<p>make TTS engine instance free.</p>
+<h5>Parameters</h5>
+<ul>
+<li>void </li>
+</ul>
+<h3>Returns</h3>
+<ul>
+<li>void</li>
+</ul>
+<h4>TTSMODULE.showTTSSettings() : void</h4>
+<p>open TTS Setting of device.</p>
+<h5>Parameters</h5>
+<ul>
+<li>void </li>
+</ul>
+<h3>Returns</h3>
+<ul>
+<li>void</li>
+</ul>
+<h3>module properties</h3>
+<h4>TTSMODULE.initialized</h4>
+<p>(read only)</p>
+<h4>TTSMODULE.pitch</h4>
+<h4>TTSMODULE.rate</h4>
+<h3>module events</h3>
+<h4>checkok</h4>
+<h4>ttsinstallstart</h4>
+<h4>error</h4>
+<h4>initok</h4>
+<h4>utterancecomplete</h4>
+<h2>Usage</h2>
+<p>The most simply example of usage of TextToSpeech module is below:</p>
+<pre><code>var tts = require("jp.isisredirect.tts");
+tts.addEventListener(tts.TTS_INITOK, function(e) {
+    tts.speak("Hello", "spoken Hello");
+});
+tts.addEventListener(tts.TTS_UTTERANCE_COMPLETE, function(e) {
+    if (e.utteranceid == "spoken Hello") {
+        tts.speak("world");
+    }
+});
+tts.initTTS();
+</code></pre>
+<p>For more deep usage, you see /example/app.js</p>
+<h2>Author</h2>
+<p>Kastumi ISHIDA (isis re-direct) in k.i.office.</p>
+<p>isis.redirect4@gmail.com</p>
+<h2>License</h2>
+<p>Copyright (c) 2013 Katsumi ISHIDA. All rights reserved.</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

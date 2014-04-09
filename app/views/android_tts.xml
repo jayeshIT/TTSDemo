@@ -1,0 +1,9 @@
+<Alloy>
+	<Window id="android_tts" class="container">
+		<Picker id="enginespicker" />
+		<Picker id="voicespicker" />
+		<Button id="speakbutton" />
+		<Button id="settingbutton" />
+		<Label id="label" />
+	</Window>
+</Alloy>

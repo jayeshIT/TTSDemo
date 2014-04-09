@@ -1,0 +1,32 @@
+"#android_tts":{
+	backgroundColor:"#00FFFF"
+},
+"#label":{
+	text:"Text To Speech Module"
+}
+"#enginespicker":{
+	height : '10%',
+	width : '90%',
+	top : '5%',
+	left : '5%'
+},
+"#voicespicker":{
+	height : '10%',
+	width : '90%',
+	top : '25%',
+	left : '5%'
+},
+"#settingbutton":{
+	title : 'Setting',
+	height : '7%',
+	width : '35%',
+	top : '60%',
+	left : '55%'
+},
+"#speakbutton":{
+	title : 'Speak',
+	height : '7%',
+	width : '35%',
+	top : '60%',
+	left : '10%'
+}
